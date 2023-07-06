@@ -26,6 +26,7 @@ const upload = multer({
 })
 
 router.get('/', async (req, res, next) => {
+	console.log('小号测试');
 	res.send({
 		code: 200,
 		data: await AppVersionModel.find().sort({ versionNum: -1 }).exec()
