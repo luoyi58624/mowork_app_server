@@ -1,0 +1,11 @@
+.vscode
+.idea
+.hbuilderx
+package-lock.json
+/node_modules
+/dist
+/public
+/src/assets
+/src/static/ucharts
+/src/components/ucharts
+/src/components/uni-ui
