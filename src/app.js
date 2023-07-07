@@ -1,12 +1,10 @@
 const express = require('express')
-const path = require('path')
+
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
-const dotenv = require('dotenv')
 const cors = require('cors')
 require('express-async-errors')
 
-dotenv.config()
 
 const app = express()
 app.use(cors())

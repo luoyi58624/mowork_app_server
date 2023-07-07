@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start:local": "cross-env NODE_ENV=dev nodemon ./bin/www",
-    "start:remote": "cross-env NODE_ENV=prod nodemon ./bin/www",
-    "prod": "nodemon ./bin/www",
+    "start:local": "cross-env NODE_ENV=development nodemon ./bin/www",
+    "start:remote": "cross-env NODE_ENV=production nodemon ./bin/www",
+    "prod": "cross-env NODE_ENV=production pm2 start ./bin/www",
     "update:dep": "ncu -u && npm i",
     "prettier": "prettier --config prettier.config.cjs --write ./src/**/*.js"
   },
