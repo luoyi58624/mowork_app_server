@@ -1,6 +1,5 @@
 var express = require('express')
-const AppVersionModel = require('../models/app_version')
-const formidable = require('formidable')
+const model = require('./model')
 const multer = require('multer')
 
 var router = express.Router()
@@ -29,13 +28,13 @@ const upload = multer({
 router.get('/', async (req, res, next) => {
 	res.send({
 		code: 200,
-		data: await AppVersionModel.find().sort({ versionNum: -1 }).exec()
+		data: await model.find().sort({ versionNum: -1 }).exec()
 	})
 })
 
 router.post('/upload', upload.single('file'), async (req, res, next) => {
 	console.log(req.file)
-	await AppVersionModel({
+	await model({
 		...req.body,
 		appName: req.file.originalname,
 		fileSize: req.file.size,
@@ -48,7 +47,7 @@ router.post('/upload', upload.single('file'), async (req, res, next) => {
 })
 
 router.delete('/:id', async (req, res, next) => {
-	await AppVersionModel.deleteMany({ _id: { $in: req.params.id.split(',') } })
+	await model.deleteMany({ _id: { $in: req.params.id.split(',') } })
 	res.send({
 		code: 200,
 		data: '删除成功'
@@ -58,7 +57,7 @@ router.delete('/:id', async (req, res, next) => {
 router.get('/newVersion', async (req, res, next) => {
 	res.send({
 		code: 200,
-		data: await AppVersionModel.find().sort({ versionNum: -1 }).limit(1).exec()
+		data: await model.find().sort({ versionNum: -1 }).limit(1).exec()
 	})
 })
 

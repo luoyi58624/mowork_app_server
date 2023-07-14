@@ -5,7 +5,6 @@ const logger = require('morgan')
 const cors = require('cors')
 require('express-async-errors')
 
-
 const app = express()
 app.use(cors())
 app.use(logger('dev'))
