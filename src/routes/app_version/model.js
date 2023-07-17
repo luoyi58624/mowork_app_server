@@ -12,7 +12,7 @@ const AppVersionModel = mongoose.model(
 			type: String,
 			required: true
 		},
-		versionNum: {
+		versionCode: {
 			type: Number,
 			required: true
 		},
