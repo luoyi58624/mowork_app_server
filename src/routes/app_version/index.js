@@ -1,10 +1,10 @@
-var express = require('express')
+const express = require('express')
 const model = require('./model')
 const multer = require('multer')
 const { check, validationResult } = require('express-validator')
 const { isEmpty } = require('../../utils/common')
 
-var router = express.Router()
+const router = express.Router()
 
 const storage = multer.diskStorage({
 	destination(req, file, callback) {
@@ -44,7 +44,6 @@ router.post(
 		check('versionCode', '请传入版本号').notEmpty()
 	],
 	async (req, res, next) => {
-		console.log(req.body)
 		if (isEmpty(req.file)) {
 			return res.send({
 				code: 500,
@@ -75,12 +74,11 @@ router.put(
 	upload.single('file'),
 	[
 		check('_id', '请传入_id').notEmpty(),
-		check('appName', '请传入App名字').notEmpty(),
+    check('appName', '请传入App名字').notEmpty(),
 		check('versionName', '请传入版本名字').notEmpty(),
 		check('versionCode', '请传入版本号').notEmpty()
 	],
 	async (req, res, next) => {
-		console.log(req.body)
 		const result = validationResult(req)
 		if (!result.isEmpty()) {
 			return res.send({
@@ -112,7 +110,7 @@ router.delete('/:id', async (req, res, next) => {
 router.get('/newVersion', async (req, res, next) => {
 	res.send({
 		code: 200,
-		data: await model.find().sort({ versionCode: -1 }).limit(1).exec()
+		data: await model.findOne().sort({ versionCode: -1 }).exec()
 	})
 })
 
