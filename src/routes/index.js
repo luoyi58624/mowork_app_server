@@ -3,7 +3,7 @@ const router = express.Router()
 router.get('/', async (req, res, next) => {
 	res.send({
 		code: 200,
-		data: 'hello,node'
+		data: 'hello,测试自动化部署'
 	})
 })
 
