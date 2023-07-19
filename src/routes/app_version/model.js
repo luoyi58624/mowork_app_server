@@ -16,6 +16,10 @@ const AppVersionModel = mongoose.model(
 			type: Number,
 			required: true
 		},
+		fileSize: {
+			type: Number,
+			required: true
+		},
 		updateDesc: {
 			type: Array,
 			default: () => []

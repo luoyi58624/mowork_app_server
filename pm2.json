@@ -7,7 +7,7 @@
 		"interpreter": "",
 		"interpreter_args": "",
 		"watch": true,
-		"ignore_watch": ["node_modules", "logs"],
+		"ignore_watch": ["node_modules", "logs", "public"],
 		"exec_mode": "cluster_mode",
 		"instances": 4,
 		"max_memory_restart": 8,
