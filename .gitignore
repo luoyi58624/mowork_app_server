@@ -14,7 +14,7 @@ lerna-debug.log*
 # OS
 .DS_Store
 
-public/apk
+public/apk/*
 # Tests
 /coverage
 /.nyc_output

@@ -12,14 +12,17 @@ const storage = multer.diskStorage({
 	},
 	filename(req, file, callback) {
 		console.log(req.body)
+		// callback(null, req.body.appName)
 		callback(null, req.body.appName)
 	}
 })
 
 const upload = multer({
 	storage,
-	fileFilter: (req, file, callback) => {
+	fileFilter: (req, file, callback) => { 
 		if (file.originalname.endsWith('.apk')) {
+			console.log(req.body) 
+			// console.log(file)
 			file.originalname = Buffer.from(file.originalname, 'latin1').toString('utf8')
 			callback(null, true)
 		} else {
@@ -74,7 +77,7 @@ router.put(
 	upload.single('file'),
 	[
 		check('_id', '请传入_id').notEmpty(),
-    check('appName', '请传入App名字').notEmpty(),
+		check('appName', '请传入App名字').notEmpty(),
 		check('versionName', '请传入版本名字').notEmpty(),
 		check('versionCode', '请传入版本号').notEmpty()
 	],
