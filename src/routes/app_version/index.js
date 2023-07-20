@@ -1,27 +1,34 @@
 const express = require('express')
 const model = require('./model')
 const multer = require('multer')
+const qiniu = require('qiniu')
+const stream = require('stream')
+
 const { check, validationResult } = require('express-validator')
 const { isEmpty } = require('../../utils/common')
+const { qiniuHttp, qiniuConfig, getUploadToken } = require('../../utils/qiniu')
 
 const router = express.Router()
 
-const storage = multer.diskStorage({
-	destination(req, file, callback) {
-		callback(null, './public/apk')
-	},
-	filename(req, file, callback) {
-		console.log(req.body)
-		// callback(null, req.body.appName)
-		callback(null, req.body.appName)
-	}
-})
-
+// const storage = multer.diskStorage({
+// 	destination(req, file, callback) {
+// 		callback(null, './public/apk')
+// 	},
+// 	filename(req, file, callback) {
+// 		console.log(req.body)
+// 		// callback(null, req.body.appName)
+// 		callback(null, req.body.appName)
+// 	}
+// })
+const storage = multer.memoryStorage()
 const upload = multer({
 	storage,
-	fileFilter: (req, file, callback) => { 
+	limits: {
+		fileSize: 1024 * 1024 * 50
+	},
+	fileFilter: (req, file, callback) => {
 		if (file.originalname.endsWith('.apk')) {
-			console.log(req.body) 
+			console.log(req.body)
 			// console.log(file)
 			file.originalname = Buffer.from(file.originalname, 'latin1').toString('utf8')
 			callback(null, true)
@@ -47,6 +54,7 @@ router.post(
 		check('versionCode', '请传入版本号').notEmpty()
 	],
 	async (req, res, next) => {
+		console.log(req.file)
 		if (isEmpty(req.file)) {
 			return res.send({
 				code: 500,
@@ -60,15 +68,42 @@ router.post(
 				msg: result.array()
 			})
 		}
-		await model({
-			...req.body,
-			fileSize: req.file.size,
-			downloadUrl: `/apk/${req.body.appName}`
-		}).save()
-		res.send({
-			code: 200,
-			data: '上传成功'
-		})
+
+		const formUploader = new qiniu.form_up.FormUploader(qiniuConfig)
+		const putExtra = new qiniu.form_up.PutExtra()
+		const uploadToken = getUploadToken(req.body['appName'])
+		// const bufferStream = new stream.PassThrough()
+		// const streams = bufferStream.end(req.file.buffer)
+		// console.log(streams)
+		// 以二进制流的形式上传
+		formUploader.putStream(
+			uploadToken,
+			req.body['appName'],
+			stream.Readable.from(req.file.buffer),
+			// req.file.buffer.toString(),
+			putExtra,
+			async function (respErr, respBody, respInfo) {
+				if (respErr) {
+					throw respErr
+				}
+				if (respInfo.statusCode == 200) {
+					await model({
+						...req.body,
+						fileSize: req.file.size,
+						downloadUrl: `${qiniuHttp}/${req.body.appName}`
+					}).save()
+					res.send({
+						code: 200,
+						data: '上传成功'
+					})
+				} else {
+					res.send({
+						code: 500,
+						data: '七牛云上传失败'
+					})
+				}
+			}
+		)
 	}
 )
 
