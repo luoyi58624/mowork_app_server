@@ -24,6 +24,8 @@ jobs:
           port: 22
           script: |
             cd /www/wwwroot/mowork_app_server
+            git fetch --all
+            git reset --hard origin/master
             git pull
             yarn
             pm2 restart pm2.json
