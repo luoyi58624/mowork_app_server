@@ -6,7 +6,7 @@
 		"args": "",
 		"interpreter": "",
 		"interpreter_args": "",
-		"watch": true,
+		"watch": false,
 		"ignore_watch": ["node_modules", "logs", "public"],
 		"exec_mode": "cluster_mode",
 		"instances": 4,

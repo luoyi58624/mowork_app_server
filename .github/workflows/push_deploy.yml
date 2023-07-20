@@ -25,3 +25,5 @@ jobs:
           script: |
             cd /www/wwwroot/mowork_app_server
             git pull
+            yarn
+            pm2 restart pm2.json
