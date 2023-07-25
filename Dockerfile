@@ -3,6 +3,6 @@ RUN mkdir -p /app
 WORKDIR /app
 COPY . /app
 RUN npm install pm2 -g
-RUN npm install --production
+RUN npm install
 EXPOSE 10008
 CMD npm run prod
