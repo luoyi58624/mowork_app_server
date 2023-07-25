@@ -1,6 +1,7 @@
 FROM node
-RUN mkdir -p /node_server
-WORKDIR /node_server
-COPY . /node_server
+RUN mkdir -p /app
+WORKDIR /app
+COPY . /app
+RUN yarn
 EXPOSE 80
-CMD ["node", "index.js"]
+CMD ["pm2-docker","start","pm2.json"]
