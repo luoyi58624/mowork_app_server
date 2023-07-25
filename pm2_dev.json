@@ -6,11 +6,8 @@
 		"args": "",
 		"interpreter": "",
 		"interpreter_args": "",
-		"watch": false,
-		"ignore_watch": ["node_modules", "logs", "public"],
-		"exec_mode": "cluster_mode",
-		"instances": 4,
-		"max_memory_restart": 8,
+		"watch": true,
+		"ignore_watch": ["node_modules", "logs", "public", ".idea", ".vscode", ".*", "Dockerfile"],
 		"error_file": "./logs/app-err.log",
 		"out_file": "./logs/app-out.log",
 		"merge_logs": true,
@@ -21,10 +18,9 @@
 		"cron_restart": "",
 		"restart_delay": 5000,
 		"env": {
-			"NODE_ENV": "development"
-		},
-		"env_production": {
-			"NODE_ENV": "production"
+			"NODE_ENV": "development",
+			"PORT": 3001,
+			"MONGODB": "mongodb://luoyi:123456@localhost:27017/mowork"
 		}
 	}
 }

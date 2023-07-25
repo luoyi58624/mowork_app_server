@@ -1,7 +1,7 @@
 FROM node:16.18.1
 RUN mkdir -p /app
 WORKDIR /app
-COPY . /app
+COPY . /app 
 RUN npm install pm2 -g
 RUN npm install
 EXPOSE 10008

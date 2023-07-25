@@ -1,0 +1,28 @@
+{
+	"apps": {
+		"name": "mowork_app_server",
+		"script": "./bin/www",
+		"cwd": "./",
+		"args": "",
+		"interpreter": "",
+		"interpreter_args": "",
+		"watch": false,
+		"exec_mode": "cluster_mode",
+		"instances": 4,
+		"max_memory_restart": 8,
+		"error_file": "./logs/app-err.log",
+		"out_file": "./logs/app-out.log",
+		"merge_logs": true,
+		"log_date_format": "YYYY-MM-DD HH:mm:ss",
+		"min_uptime": "60s",
+		"max_restarts": 30,
+		"autorestart": true,
+		"cron_restart": "",
+		"restart_delay": 5000,
+		"env": {
+			"NODE_ENV": "production",
+			"PORT": 10008,
+			"MONGODB": "mongodb://luoyi:123456@115.159.28.38:27017/app_version"
+		}
+	}
+}

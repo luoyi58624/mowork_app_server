@@ -8,11 +8,8 @@ const app = require('../src/app')
 const debug = require('debug')('node:server')
 const http = require('http')
 const mongoose = require('mongoose')
-const dotenv = require('dotenv')
-const path = require('path')
 const interfaces = require('os').networkInterfaces()
 
-dotenv.config({ path: `.env.${process.env.NODE_ENV}` })
 const port = normalizePort(process.env.PORT)
 app.set('port', port)
 
