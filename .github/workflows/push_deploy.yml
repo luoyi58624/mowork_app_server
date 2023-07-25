@@ -27,5 +27,8 @@ jobs:
             git fetch --all
             git reset --hard origin/master
             git pull
-            yarn
-            pm2 restart pm2.json
+            docker stop $(docker ps -f name=mowork_app_sever -q)
+            docker rm $(docker ps -f name=mowork_app_sever -q)
+            docker rmi -f $(docker images mowork_app_server -q)
+            docker build -t mowork_app_server .
+            docker run -d -p 10008:80 mowork_app_server:latest
