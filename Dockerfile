@@ -5,4 +5,4 @@ COPY . /app
 RUN npm install pm2 -g
 RUN npm install --production
 EXPOSE 10008
-CMD [ "pm2-runtime", "start", "pm2.json" ]
+CMD npm run prod
