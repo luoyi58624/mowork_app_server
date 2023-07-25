@@ -24,7 +24,7 @@ jobs:
             git reset --hard origin/master
             git pull
             docker stop $(docker ps -f name=mowork_app_server -q)
-            docker rm $(docker ps -f name=mowork_app_server -q)
+            docker rm $(docker ps -af name=mowork_app_server -q)
             docker rmi -f $(docker images mowork_app_server:latest -q)
             docker build -t mowork_app_server:latest .
             docker run --name=mowork_app_server -d -p 10008:10008 mowork_app_server:latest
