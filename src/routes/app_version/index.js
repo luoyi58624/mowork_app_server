@@ -72,15 +72,11 @@ router.post(
 		const formUploader = new qiniu.form_up.FormUploader(qiniuConfig)
 		const putExtra = new qiniu.form_up.PutExtra()
 		const uploadToken = getUploadToken(req.body['appName'])
-		// const bufferStream = new stream.PassThrough()
-		// const streams = bufferStream.end(req.file.buffer)
-		// console.log(streams)
 		// 以二进制流的形式上传
 		formUploader.putStream(
 			uploadToken,
 			req.body['appName'],
 			stream.Readable.from(req.file.buffer),
-			// req.file.buffer.toString(),
 			putExtra,
 			async function (respErr, respBody, respInfo) {
 				if (respErr) {
@@ -138,6 +134,7 @@ router.put(
 )
 
 router.delete('/:id', async (req, res, next) => {
+	
 	await model.deleteMany({ _id: { $in: req.params.id.split(',') } })
 	res.send({
 		code: 200,
