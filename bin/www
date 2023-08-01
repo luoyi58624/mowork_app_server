@@ -26,7 +26,7 @@ server.listen(port, async () => {
   // console.log(process.env.MONGODB);
   await mongoose.connect(process.env.MONGODB);
   // const networkIPs = getNetWorkIP();
-  // console.log(`Local：  http://localhost:${process.env.PORT}`);
+  console.log(`Local：  http://localhost:${process.env.PORT}`);
   // networkIPs.forEach(ip => {
   //   console.log(`Network：http://${ip}:${process.env.PORT}`);
   // });
