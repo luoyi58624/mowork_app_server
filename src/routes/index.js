@@ -15,6 +15,14 @@ router.get('/getUploadToken', async (req, res, next) => {
 	})
 })
 
+router.get('/autoDeplay', async (req, res, next) => {
+	res.send({
+		code: 200,
+		data: '自动部署'
+	})
+})
+
 router.use('/app-version', require('./app_version'))
+router.use('/other', require('./other/upload'))
 
 module.exports = router
