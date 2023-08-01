@@ -11,7 +11,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const interfaces = require("os").networkInterfaces();
 
-console.log(process.env.NODE_ENV);
+// console.log(process.env.NODE_ENV);
 // 生产环境运行在pm2下，不需要通过dotenv注入环境变量
 if (process.env.NODE_ENV !== "production") {
   dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
@@ -23,13 +23,13 @@ app.set("port", port);
 const server = http.createServer(app);
 
 server.listen(port, async () => {
-  console.log(process.env.MONGODB);
+  // console.log(process.env.MONGODB);
   await mongoose.connect(process.env.MONGODB);
-  const networkIPs = getNetWorkIP();
-  console.log(`Local：  http://localhost:${process.env.PORT}`);
-  networkIPs.forEach(ip => {
-    console.log(`Network：http://${ip}:${process.env.PORT}`);
-  });
+  // const networkIPs = getNetWorkIP();
+  // console.log(`Local：  http://localhost:${process.env.PORT}`);
+  // networkIPs.forEach(ip => {
+  //   console.log(`Network：http://${ip}:${process.env.PORT}`);
+  // });
 });
 server.on("error", onError);
 server.on("listening", onListening);
