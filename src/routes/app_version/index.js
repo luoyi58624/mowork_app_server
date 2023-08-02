@@ -39,7 +39,6 @@ router.post(
 	[
 		check('appName', '请传入App名字').notEmpty(),
 		check('versionName', '请传入版本名字').notEmpty(),
-		check('versionCode', '请传入版本号').notEmpty(),
 		check('fileSize', '请传入上传的文件大小').notEmpty()
 	],
 	async (req, res, next) => {
@@ -50,8 +49,10 @@ router.post(
 				msg: result.array()
 			})
 		}
+		const newestData = await model.findOne().sort({ versionCode: -1 }).exec()
 		await model({
 			...req.body,
+			versionCode: isEmpty(newestData) ? 1 : newestData.versionCode + 1,
 			downloadUrl: `${qiniuHttp}/${req.body.appName}`
 		}).save()
 		res.send({
@@ -80,7 +81,7 @@ router.put(
 
 		await model.findByIdAndUpdate(req.body['_id'], {
 			...req.body,
-      downloadUrl: `${qiniuHttp}/${req.body.appName}`
+			downloadUrl: `${qiniuHttp}/${req.body.appName}`
 		})
 		res.send({
 			code: 200,

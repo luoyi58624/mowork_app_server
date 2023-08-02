@@ -18,7 +18,8 @@ function getUploadToken(fileName) {
 	}
 	const putPolicy = new qiniu.rs.PutPolicy({
 		scope: scope,
-		expires: 300 // token有效期5分钟
+		expires: 300, // token有效期5分钟
+		returnBody: '{"key":"$(key)","hash":"$(etag)","fsize":$(fsize),"bucket":"$(bucket)","name":"$(x:name)"}'
 	})
 	const uploadToken = putPolicy.uploadToken(mac)
 	return uploadToken
