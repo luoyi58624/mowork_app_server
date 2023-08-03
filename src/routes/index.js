@@ -23,6 +23,6 @@ router.get('/autoDeplay', async (req, res, next) => {
 })
 
 router.use('/app-version', require('./app_version'))
-router.use('/other', require('./other/upload'))
+router.use('/other', require('./other'))
 
 module.exports = router

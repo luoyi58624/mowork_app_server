@@ -1,8 +1,6 @@
 const express = require('express')
 const model = require('./model')
 const multer = require('multer')
-const qiniu = require('qiniu')
-const stream = require('stream')
 
 const { check, validationResult } = require('express-validator')
 const { isEmpty } = require('../../utils/common')
