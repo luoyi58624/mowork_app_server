@@ -3,6 +3,7 @@ const express = require('express')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const cors = require('cors')
+const { MulterError } = require('multer')
 require('express-async-errors')
 
 const app = express()
@@ -24,15 +25,27 @@ app.use(function (req, res, next) {
 })
 
 app.use(function (err, req, res, next) {
-	console.log(err)
-	if (err instanceof Error) {
-		res.status(500).send({
-			code: 0,
+	console.log(err, '全局错误拦截')
+	if (err.constructor === MulterError) {
+		if (err.code === 'LIMIT_FILE_SIZE') {
+			res.status(200).send({
+				code: 500,
+				msg: '上传的文件尺寸超出限制'
+			})
+		} else {
+			res.status(200).send({
+				code: 500,
+				msg: err.message
+			})
+		}
+	} else if (err.constructor === Error) {
+		res.status(200).send({
+			code: 500,
 			msg: err.message
 		})
 	} else {
-		res.status(500).send({
-			code: 0,
+		res.status(200).send({
+			code: 500,
 			msg: '服务内部错误'
 		})
 	}

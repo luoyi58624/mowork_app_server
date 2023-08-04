@@ -14,9 +14,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({
 	storage,
-	limits: {
-		fileSize: 1024 * 1024 * 50
-	},
 	fileFilter: (req, file, callback) => {
 		file.originalname = Buffer.from(file.originalname, 'latin1').toString('utf8')
 		callback(null, true)
