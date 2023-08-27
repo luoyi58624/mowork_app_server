@@ -21,6 +21,7 @@
       "restart_delay": 5000,
       "env": {
         "NODE_ENV": "production",
+        "TITLE": "Mowork开发版接口",
         "PORT": 10008,
         "MONGODB": "mongodb://mowork_dev:123456@localhost:27017/mowork_dev"
       }
@@ -46,6 +47,7 @@
       "restart_delay": 5000,
       "env": {
         "NODE_ENV": "production",
+        "TITLE": "Mowork生产版接口",
         "PORT": 10009,
         "MONGODB": "mongodb://mowork:mowork123456@localhost:27017/mowork"
       }
