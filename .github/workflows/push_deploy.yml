@@ -27,5 +27,7 @@ jobs:
             git fetch --all
             git reset --hard origin/master
             git pull
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
             npm i
-            pm2 restart pm2.json
+            pm2 restart pm2_prod.json
