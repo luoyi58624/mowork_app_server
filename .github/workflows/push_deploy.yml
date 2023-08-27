@@ -27,5 +27,5 @@ jobs:
             git fetch --all
             git reset --hard origin/master
             git pull
-            yarn
+            npm i
             pm2 restart pm2.json
