@@ -1,5 +1,9 @@
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+
 name: auto deploy mowork_app_server
 
+# 当master分支提交时触发
 on:
   push:
     branches:
@@ -23,8 +27,5 @@ jobs:
             git fetch --all
             git reset --hard origin/master
             git pull
-            docker stop $(docker ps -f name=mowork_app_server -q)
-            docker rm $(docker ps -af name=mowork_app_server -q)
-            docker rmi -f $(docker images mowork_app_server:latest -q)
-            docker build -t mowork_app_server:latest .
-            docker run --name=mowork_app_server -d -p 10008:10008 mowork_app_server:latest
+            yarn
+            pm2 restart pm2.json
