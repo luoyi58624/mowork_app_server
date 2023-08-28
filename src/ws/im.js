@@ -1,6 +1,6 @@
 const WebSocket = require('ws')
 
-const imWs = new WebSocket.Server({ port: 3002 })
+const imWs = new WebSocket.Server({ port: process.env.SOCKET_PORT })
 
 imWs.on('open', function open() {
 	console.log('创建im socket')

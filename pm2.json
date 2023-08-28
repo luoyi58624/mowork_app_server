@@ -23,6 +23,7 @@
         "NODE_ENV": "production",
         "TITLE": "Mowork开发版接口",
         "PORT": 11000,
+        "SOCKET_PORT": 12000,
         "MONGODB": "mongodb://mowork_dev:123456@localhost:27017/mowork_dev"
       }
     },
@@ -49,6 +50,7 @@
         "NODE_ENV": "production",
         "TITLE": "Mowork生产版接口",
         "PORT": 11001,
+        "SOCKET_PORT": 12001,
         "MONGODB": "mongodb://mowork:mowork123456@localhost:27017/mowork"
       }
     }
