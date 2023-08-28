@@ -1,0 +1,56 @@
+{
+  "apps": [
+    {
+      "name": "mowork_dev",
+      "script": "./bin/www",
+      "cwd": "./",
+      "args": "",
+      "interpreter": "",
+      "interpreter_args": "",
+      "watch": false,
+      "exec_mode": "fork_mode",
+      "max_memory_restart": 8,
+      "error_file": "./logs/mowork_dev/app-err.log",
+      "out_file": "./logs/mowork_dev/app-out.log",
+      "merge_logs": true,
+      "log_date_format": "YYYY-MM-DD HH:mm:ss",
+      "min_uptime": "60s",
+      "max_restarts": 30,
+      "autorestart": true,
+      "cron_restart": "",
+      "restart_delay": 5000,
+      "env": {
+        "NODE_ENV": "production",
+        "TITLE": "Mowork开发版接口",
+        "PORT": 11000,
+        "MONGODB": "mongodb://mowork_dev:123456@localhost:27017/mowork_dev"
+      }
+    },
+    {
+      "name": "mowork_prod",
+      "script": "./bin/www",
+      "cwd": "./",
+      "args": "",
+      "interpreter": "",
+      "interpreter_args": "",
+      "watch": false,
+      "exec_mode": "fork_mode",
+      "max_memory_restart": 8,
+      "error_file": "./logs/mowork_prod/app-err.log",
+      "out_file": "./logs/mowork_prod/app-out.log",
+      "merge_logs": true,
+      "log_date_format": "YYYY-MM-DD HH:mm:ss",
+      "min_uptime": "60s",
+      "max_restarts": 30,
+      "autorestart": true,
+      "cron_restart": "",
+      "restart_delay": 5000,
+      "env": {
+        "NODE_ENV": "production",
+        "TITLE": "Mowork生产版接口",
+        "PORT": 11001,
+        "MONGODB": "mongodb://mowork:mowork123456@localhost:27017/mowork"
+      }
+    }
+  ]
+}
