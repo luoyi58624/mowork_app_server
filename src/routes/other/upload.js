@@ -5,7 +5,7 @@ const router = express.Router()
 
 const storage = multer.diskStorage({
 	destination(req, file, callback) {
-		callback(null, './public/apk')
+		callback(null, './public/upload')
 	},
 	filename(req, file, callback) {
 		callback(null, file.originalname)
@@ -23,7 +23,10 @@ const upload = multer({
 router.post('/upload', upload.single('file'), async (req, res, next) => {
 	res.send({
 		code: 200,
-		data: '上传成功'
+		data: {
+			fileName: req.file.originalname,
+			uploadPath: '/upload/' + req.file.originalname
+		}
 	})
 })
 
