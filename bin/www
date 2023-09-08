@@ -1,21 +1,16 @@
-#!/usr/bin/env node
-
-/**
- * Module dependencies.
- */
+const dotenv = require("dotenv");
+// 生产环境运行在pm2下，不需要通过dotenv注入环境变量
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
+}
 
 const app = require("../src/app");
 const debug = require("debug")("node:server");
 const http = require("http");
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+
 const interfaces = require("os").networkInterfaces();
 
-// console.log(process.env.NODE_ENV);
-// 生产环境运行在pm2下，不需要通过dotenv注入环境变量
-if (process.env.NODE_ENV !== "production") {
-  dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
-}
 
 const port = normalizePort(process.env.PORT);
 app.set("port", port);
