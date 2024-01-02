@@ -25,7 +25,7 @@ app.use(function (req, res, next) {
 })
 
 app.use(function (err, req, res, next) {
-	console.log(err, '全局错误拦截')
+	// console.log(err, '全局错误拦截')
 	if (err.constructor === MulterError) {
 		if (err.code === 'LIMIT_FILE_SIZE') {
 			res.status(200).send({
